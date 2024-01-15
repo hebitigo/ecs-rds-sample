@@ -1,0 +1,19 @@
+services:
+  go-server:
+    container_name: go-server
+    build:
+      context: ../go-server
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+  db:
+    container_name: postgres-db
+    image: postgres:16.1-alpine
+    environment:
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_USER=user
+      - POSTGRES_DB=dbname
+    ports:
+      - 5432:5432
